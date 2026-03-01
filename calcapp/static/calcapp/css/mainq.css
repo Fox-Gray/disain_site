@@ -1,0 +1,229 @@
+.center {
+  margin: auto;
+  width: 80%;
+  max-width: 1600px; /* Ограничение для больших экранов */
+  border: 1.2px solid #a5addb;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Сетка для сервисов (адаптивная) */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 2px;
+}
+
+/* Строка с корзиной и WhatsApp */
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding-top: 5px;
+}
+
+/* Кнопка корзины */
+.action-row form button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
+.action-row form button:hover {
+  background-color: #e68a00;
+}
+
+
+/* Кнопка WhatsApp */
+.whatsapp-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 6%;
+  padding: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.whatsapp-btn img {
+  width: 100%;
+  height: auto;
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+  .center {
+    width: 95%;
+    padding: 15px;
+  }
+
+
+  .service-grid {
+    grid-template-columns: 1fr; /* Одна колонка на мобильных */
+    gap: 10px;
+  }
+
+  .service-grid button,
+  .action-row form button {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+
+  .action-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+  .center {
+    padding: 10px;
+  }
+
+  .whatsapp-btn {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+
+.custom-class {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem; /* 8px */
+}
+
+.responsive-text {
+  font-size: 1.25rem; /* 20px */
+  color: black; /* gray-300 */
+  font-weight: 500; /* semibold */
+}
+
+@media (min-width: 768px) {
+  .responsive-text {
+    font-size: 1.5rem; /* 24px */
+  }
+}
+
+
+.dynamic-text {
+  font-size: 0.875rem;
+  color: var(--dynamic-color); /* Определяется JS */
+}
+
+.calculation-block {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+
+.left-column,
+.right-column {
+  display: table-cell;
+  vertical-align: top;
+  padding: 12px;
+}
+
+.left-column {
+  width: 70%;
+  background-color: #f8f9fa;
+}
+
+.right-column {
+  width: 3 grinding%;
+  text-align: center;
+}
+
+.sum-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #e74c3c;
+}
+
+.left-column span {
+  display: table-row;
+  margin: 8px 0;
+}
+.futter-calc {
+  background-color: #f0f0f0; /* Светло-серый фон подвала */
+  padding: 20px 0;
+}
+
+.cookie-notice {
+  background-color: #90EE90;
+  margin: auto;
+  width: 80%;
+  max-width: 1200px; /* Ограничение для больших экранов */
+  padding: 20px;
+  border-radius: 8px;
+  }
+
+
+/* css чисто для футера */
+.footer-container {
+  display: flex;                  /* Flex-контейнер для горизонтального расположения */
+
+  align-items: center;            /* Выравниваем блоки по вертикали */
+  flex-wrap: wrap;                /* Позволяем блокам переноситься при нехватке места */
+  gap: 20px;                      /* Промежуток между блоками */
+  max-width: 1200px;              /* Ограничиваем максимальную ширину контейнера */
+  margin: 0 auto;                 /* Центрируем контейнер в пределах подвала */
+  padding: 0 20px;                /* Горизонтальные отступы на десктопе */
+
+}
+
+.footer-rab,
+.footer-nav,
+.footer-contacts{
+    margin: 0; /* Убираем лишние вертикальные отступы */
+}
+
+.footer-rab li,
+.footer-nav li,
+.footer-contacts li {
+  list-style: none;    /* Убираем маркеры списка */
+  margin-bottom: 5px;  /* Отступ между пунктами списка */
+}
+
+.footer-nav a,
+.footer-contacts a {
+  text-decoration: none; /* Убираем подчёркивание у ссылок */
+  color: #333;           /* Цвет текста ссылок */
+}
+
+@media (max-width: 600px) {
+  .footer-container {
+    flex-direction: column; /* На мобильных блоки идут вертикально */
+    align-items: flex-start;/* Выравниваем по левому краю */
+    text-align: left;       /* Выравниваем текст по левому краю */
+    gap: 10px;              /* Меньший промежуток между блоками */
+    padding: 0 0px;        /* Меньше горизонтальные отступы слева и справа */
+  }
+
+  .footer-nav,
+  .footer-contacts {
+    margin: 10px 0; /* Вертикальные отступы между блоками на мобильных */
+  }
+}
+
+/* раздел контакты*/
+.b-content-columns_content_a-b.b-content-columns_viewtype_buisnescards>.b-content-column_layout_b>.b-content-column__in,.b-content-columns_content_a-b.b-content-columns_viewtype_information>.b-content-column_layout_b>.b-content-column__in,.b-content-columns_content_a-b.b-content-columns_viewtype_processing>.b-content-column_layout_b>.b-content-column__in,.b-list_content_scroll-pick-up.b-list_type_view .b-story_content_pick-up-points,.b-loader_content-type_calculation.b-loader_viewtype_nospinner .b-loader__text,.select2-container--default .select2-results__option .select2-results__option .select2-results__group {
+    padding-left: 0
+}
+

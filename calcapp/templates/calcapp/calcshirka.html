@@ -1,0 +1,68 @@
+{% extends "calcapp/basecalc2.html" %}
+
+    {% block title %}
+    калькулятор ширки
+    {% endblock %}
+
+{% block content %}
+
+
+<div class="center">
+    <div class="b-section__header">
+        <div class="b-section__title">
+            <h4 class="b-section__title-text b-heading b-heading_level_4">Калькулятор широкоформатной печати</h4>
+        </div>
+    </div>
+    <div class="b-section__body">
+        <div class="b-section b-section_content_payment-method">
+
+            <div class="b-section__body">
+                <!-- Общий контейнер для колонок -->
+                <div class="b-content-columns b-content-columns_content_payment-method">
+                    <!-- Левая колонка -->
+                    <div class="b-content-column b-content-column_layout_a">
+                        <div class="b-content-column__in">
+                            <ul class="b-stories b-stories_content_payment-method">
+                                <li class="b-story b-story_content_payment-method">
+                                    <form method="post" action="{% url 'shirka' %}">
+                                        {% csrf_token %}
+                                        <table>
+                                            {{form.as_table}}
+                                        </table>
+                                        <br>
+                                        <button type="submit" name="Send">посчитать</button>
+                                        <button type="submit" name="basket">Добавить в корзину</button>
+                                    </form>
+                                    <br>
+                                    Итого сумма:
+                                    <h1>{{result}} Рублей</h1>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Правая колонка -->
+                    <div class="b-content-column b-content-column_layout_b">
+                        <div class="b-content-column__in">
+                            <div class="b-story b-story_content_fast-payment">
+                                <h4 class="b-story__title">
+                                    <span class="b-story__title-text">Пример широкоформатной печати</span>
+                                </h4>
+                                <div class="b-story__footer">
+                                    <ul class="b-list b-list_content_cards-logo">
+                                        <li class="b-list__item">
+                                            <img class="b-list__image" src="../../static/calcapp/images/shirkaphoto.png" width="300">
+                                        </li>
+                                    </ul>
+									<iframe width="304" height="171" style="border-radius: 10px;" src="https://rutube.ru/play/embed/1cc20db66937f19d6b23ee51afa6ad77"  allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+                                    <iframe width="304" height="171" style="border-radius: 10px;" src="https://rutube.ru/play/embed/5a2efa45969ea87dee3db8b3bcced6b8?skinColor=5E35B1"  allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- /b-content-columns -->
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

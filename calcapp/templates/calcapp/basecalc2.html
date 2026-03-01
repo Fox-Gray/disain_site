@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru" >
+<head>
+
+      <meta charset="UTF-8">
+      <title>{% block title %} {% endblock %}</title>
+      <link rel="shortcut icon" type='x-icon' href="{% static 'favicon.ico' %}">
+      <link rel="stylesheet" href="{% static 'calcapp/css/mainq.css' %}">
+        <link rel="stylesheet" href="{% static 'calcapp/css/mainqw.css' %}">
+        <link href="{%static 'calcapp/css/buttonnavi2.css'%}" rel="stylesheet" type="text/css" media="screen">
+<script type="text/javascript" src="{% static 'calcapp/js/cookiebar.js' %}"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+      {% csrf_token %}
+</head>
+<body>
+
+<div class="center">
+    <!-- Приветствие -->
+    <div class="custom-class">
+      <div>
+        <h1 class="responsive-text">
+
+          {% now "H" as current_time %}
+          {% if current_time|add:"0" < 12 %}
+           Доброе утро, {{ request.user.username }}
+          {% elif current_time|add:"0" > 17 %}
+           Добрый вечер, {{ request.user.username }}
+          {% else %}
+           Добрый день, {{ request.user.username }}
+          {% endif %}
+        </h1>
+        <div class="dynamic-text">{% now 'SHORT_DATE_FORMAT' %}</div>
+      </div>
+        <h2><img src="{% static 'calcapp/images/new_button.png' %}" width="750" height="50" alt=""/></h2>
+
+      <div>
+        <button
+          type="button"
+          onclick="window.location.href=''"
+          class="rounded-lg px-3 py-2 font-medium inline-flex"
+          :class="`text-${colorSelected.value}-500 bg-${colorSelected.value}-800 hover:bg-${colorSelected.value}-700`">
+          <i class="uil uil-setting text-left mr-1"></i>
+          Личный кабинет
+        </button>
+
+
+        {% if user.is_authenticated %}
+            <!-- Форма выхода (POST) -->
+            <form action="" method="post" class="inline">
+                {% csrf_token %}
+                <button
+                        type="submit"
+                        class="rounded-lg px-3 py-2 font-medium inline-flex items-center
+                        text-{{ colorSelected.value }}-500
+                        bg-{{ colorSelected.value }}-800
+                        hover:bg-{{ colorSelected.value }}-700
+                        transition-colors duration-200">
+                    <i class="uil uil-sign-out-alt mr-1"></i>
+                    Выход
+                </button>
+            </form>
+        {% else %}
+              <!-- Кнопка входа (переводит на страницу login) -->
+          <button
+            type="button"
+            onclick="window.location.href=''"
+            class="rounded-lg px-3 py-2 font-medium inline-flex items-center
+              text-{{ colorSelected.value }}-500
+              bg-{{ colorSelected.value }}-800
+              hover:bg-{{ colorSelected.value }}-700
+              transition-colors duration-200">
+            <i class="uil uil-sign-in-alt mr-1"></i>
+            Вход
+          </button>
+        {% endif %}
+      </div>
+    </div>
+</div>
+
+<div class="center">
+  <h4>Раздел калькуляции (введи и посчитай)</h4>
+  <div class="wrapper">
+    <!-- Группа основных сервисов -->
+    <div class="button-grid">
+      <form action="{% url 'shirka' %}">
+        <button type="submit" name="shirka">
+          <img src="{% static 'calcapp/images/shirkaphoto.png' %}" width="106" height="71" alt=""/>
+          <br>
+          Широкоформатная печать
+        </button>
+      </form>
+      <form action="">
+        <button type="submit" name="uvshka">
+          <img src="{% static 'calcapp/images/uvshirkaphoto.png' %}" width="106" height="71" alt=""/>
+          <br>
+          УФ печать рулонная
+        </button>
+      </form>
+      <form action="">
+        <button type="submit" name="uvshkalist">
+          <img src="{% static 'calcapp/images/planshetphoto.png' %}" width="106" height="71" alt=""/>
+          <br>
+          УФ печать листовая
+        </button>
+      </form>
+      <form action="">
+        <button type="submit" name="plotterka">
+          <img src="{% static 'calcapp/images/ploterphoto.png' %}" width="106" height="71" alt=""/>
+          <br>
+          Плотерная резка
+        </button>
+      </form>
+      <form action="">
+        <button type="submit" name="calcviveski">
+          <img src="{% static 'calcapp/images/viveskiphoto.png' %}" width="106" height="71" alt=""/>
+          <br>
+          Вывески
+        </button>
+      </form>
+      <form action="">
+        <button type="submit" name="calcneon">
+          <img src="{% static 'calcapp/images/neonphoto.png' %}" width="106" height="71" alt=""/>
+          <br>
+          Неон
+        </button>
+      </form>
+      <form action="">
+        <button type="submit" name="calcfreza">
+          <img src="{% static 'calcapp/images/frezaphoto.png' %}" width="106" height="71" alt=""/>
+          <br>
+          Фрезеровка
+        </button>
+      </form>
+      <form action="">
+        <button type="submit" name="calclazerrez">
+          <img src="{% static 'calcapp/images/lazerphoto.png' %}" width="106" height="71" alt=""/>
+          <br>
+          Лазерная резка
+        </button>
+      </form>
+      <form action="">
+        <button type="submit" name="dizain">
+          <img src="{% static 'calcapp/images/dizainphoto.png' %}" width="112" height="71" alt=""/>
+          <br>
+          Дизайн
+        </button>
+      </form>
+    </div>
+
+    <!-- Корзина и WhatsApp (всегда внизу) -->
+    <div class="action-row">
+      <form action="">
+        <button type="submit" name="basketshirka"><img src="{% static '/calcapp/images/images/pngtree-shopping-cart-shopping-bag-shopping-festival-3d-png-image_13453506.png' %}" width="20" height="20" alt=""/>КОРЗИНА</button>
+      </form>
+        <a href="/" class="rounded-lg px-3 py-2 font-medium inline-flex items-center">
+            <img src="{% static '/calcapp/images/home2.jpeg' %}" alt="Домой" width="50">
+<!--              <i class="uil uil-sign-out-alt mr-1"></i>-->
+<!--            Домой-->
+        </a>
+      <a title="Telegram" href="https://t.me/+79032987866" class="whatsapp-btn">
+        <img src="{% static 'main/img/free-telegram-3d-icon-png-download-8399550.png' %}" alt="Написать в Telegram" width="50">
+      </a>
+    </div>
+  </div>
+</div>
+
+{% block content %}
+{% endblock %}
+
+    <!-- Баннер о cookies -->
+    <div class="cookie-notice" style="display: none;">
+        <p>
+            Продолжая использовать наш сайт, вы соглашаетесь на обработку файлов Cookie...
+            <a href="/privacy">Политика конфиденциальности</a>.
+        </p>
+        <button type="button">Понятно</button>
+    </div>
+
+    <!-- Скрытое поле с session_key (нужно для бэкенд-логики) -->
+    <input type="hidden" id="session-key" value="{{ request.session.session_key }}">
+
+
+    <!-- Дополнительные скрипты из блоков -->
+    {% block extra_js %}{% endblock %}
+
+ <!-- Блок футера -->
+<div class="center">
+    <footer >
+      <div class="footer-container">
+          <!-- данные о работе -->
+          <nav>
+            <ul class="footer-rab">
+              <li><p>© 2010 - {% now "Y" %} г. <br> Завод рекламы «Всё Рядом». </p></li>
+                <br>
+              <li><p><strong>Режим работы офиса:</strong></p>
+                <p>Пн-Пт - 10:00 - 19:00</p>
+                <p>Сб - 11:00 - 18:00</p>
+                <p>Вс - Выходной</p>
+              </li>
+            </ul>
+          </nav>
+          <!-- Меню со ссылками -->
+          <nav>
+            <ul class="footer-nav">
+                <li><a href="/main/about">О нас</a></li>
+                <li><a href="/main">Контакты</a></li>
+                <li><a href="/main/docs">Документы</a></li>
+                <li><a href="/main/tehdoc">Тех. требования</a></li>
+                <li><a href="/main/payinfo">Оплата и доставка</a></li>
+            </ul>
+          </nav>
+
+          <!-- Блок с контактами -->
+          <ul class="footer-contacts">
+            <li><a href="tel:+79032987866">Телефон: +7 (903)298-78-66</a></li>
+            <li><a href="mailto:zakaz@vryad.ru">Email: zakaz@vryad.ru</a></li>
+          </ul>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

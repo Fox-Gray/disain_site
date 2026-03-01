@@ -1,0 +1,41 @@
+
+.button-grid {
+    display: flex;
+    flex-wrap: nowrap; /* кнопки в одну строку */
+    gap: 5px; /* отступ между кнопками */
+    overflow-x: auto; /* горизонтальная прокрутка, если не влезли */
+    padding: 5px 0;
+  }
+
+  .button-grid form {
+    margin: 0;
+  }
+
+  .button-grid button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    max-height: 200px; /* максимальная высота */
+    min-height: 120px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    border: none;
+    border-radius: 6px;
+    background-color: #FFFFFF;
+    color: black;
+    font-size: 12px;
+    line-height: 1.2;
+    overflow: hidden;
+  }
+
+  .button-grid button:hover {
+  background-color: #E2E6E9;
+  }
+
+  .button-grid img {
+    max-height: 28px; /* чтобы картинка не вылазила */
+    max-width: 106px;
+    object-fit: contain;
+    margin-bottom: 2px;

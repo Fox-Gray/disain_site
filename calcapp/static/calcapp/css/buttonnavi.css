@@ -1,0 +1,47 @@
+/* Основная сетка для кнопок */
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 колонки равной ширины */
+  gap: 5px; /* Расстояние между кнопками */
+  padding: 5px;
+}
+
+/* Стили для кнопок */
+.button-grid button {
+  width: 100%; /* Кнопка занимает всю ширину ячейки */
+  padding: 15px 0; /* Вертикальный отступ */
+  box-sizing: border-box;
+  border: none;
+  border-radius: 6px;
+  background-color: #FFFFFF;
+  color: black;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button-grid button:hover {
+  background-color: #E2E6E9;
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+  .button-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 колонки на планшетах */
+  }
+  
+  .button-grid button {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .button-grid {
+    grid-template-columns: 1fr; /* Одна колонка на смартфонах */
+  }
+  
+  .button-grid button {
+    font-size: 0.9rem;
+    padding: 10px 0;
+  }
+}
