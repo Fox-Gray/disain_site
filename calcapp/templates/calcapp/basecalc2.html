@@ -1,223 +1,173 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="ru" >
+<html lang="ru">
 <head>
-
-      <meta charset="UTF-8">
-      <title>{% block title %} {% endblock %}</title>
-      <link rel="shortcut icon" type='x-icon' href="{% static 'favicon.ico' %}">
-      <link rel="stylesheet" href="{% static 'calcapp/css/mainq.css' %}">
-        <link rel="stylesheet" href="{% static 'calcapp/css/mainqw.css' %}">
-        <link href="{%static 'calcapp/css/buttonnavi2.css'%}" rel="stylesheet" type="text/css" media="screen">
-<script type="text/javascript" src="{% static 'calcapp/js/cookiebar.js' %}"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-      {% csrf_token %}
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="shortcut icon" type="x-icon" href="{% static 'favicon.ico' %}">
+  <link rel="stylesheet" href="{% static 'calcapp/css/mainq.css' %}">
+  <link rel="stylesheet" href="{% static 'calcapp/css/mainqw.css' %}">
+  <script type="text/javascript" src="{% static 'calcapp/js/cookiebar.js' %}"></script>
 </head>
 <body>
 
-<div class="center">
-    <!-- Приветствие -->
-    <div class="custom-class">
-      <div>
-        <h1 class="responsive-text">
+<!-- ========== ХЕДЕР ========== -->
+<header class="site-header">
+  <a class="site-logo" href="{% url 'kulkulatori' %}">Завод Рекламы</a>
 
-          {% now "H" as current_time %}
-          {% if current_time|add:"0" < 12 %}
-           Доброе утро, {{ request.user.username }}
-          {% elif current_time|add:"0" > 17 %}
-           Добрый вечер, {{ request.user.username }}
-          {% else %}
-           Добрый день, {{ request.user.username }}
-          {% endif %}
-        </h1>
-        <div class="dynamic-text">{% now 'SHORT_DATE_FORMAT' %}</div>
-      </div>
-        <h2><img src="{% static 'calcapp/images/new_button.png' %}" width="750" height="50" alt=""/></h2>
+  <nav>
+    <ul class="site-nav">
+      <li><a href="{% url 'kulkulatori' %}" class="active">Главная</a></li>
+      <li><a href="">О нас</a></li>
+      <li><a href="">Оплата и доставка</a></li>
+      <li><a href="">Тех. требования</a></li>
+      <li><a href="">Контакты</a></li>
+    </ul>
+  </nav>
 
-      <div>
-        <button
-          type="button"
-          onclick="window.location.href=''"
-          class="rounded-lg px-3 py-2 font-medium inline-flex"
-          :class="`text-${colorSelected.value}-500 bg-${colorSelected.value}-800 hover:bg-${colorSelected.value}-700`">
-          <i class="uil uil-setting text-left mr-1"></i>
-          Личный кабинет
-        </button>
-
-
-        {% if user.is_authenticated %}
-            <!-- Форма выхода (POST) -->
-            <form action="" method="post" class="inline">
-                {% csrf_token %}
-                <button
-                        type="submit"
-                        class="rounded-lg px-3 py-2 font-medium inline-flex items-center
-                        text-{{ colorSelected.value }}-500
-                        bg-{{ colorSelected.value }}-800
-                        hover:bg-{{ colorSelected.value }}-700
-                        transition-colors duration-200">
-                    <i class="uil uil-sign-out-alt mr-1"></i>
-                    Выход
-                </button>
-            </form>
-        {% else %}
-              <!-- Кнопка входа (переводит на страницу login) -->
-          <button
-            type="button"
-            onclick="window.location.href=''"
-            class="rounded-lg px-3 py-2 font-medium inline-flex items-center
-              text-{{ colorSelected.value }}-500
-              bg-{{ colorSelected.value }}-800
-              hover:bg-{{ colorSelected.value }}-700
-              transition-colors duration-200">
-            <i class="uil uil-sign-in-alt mr-1"></i>
-            Вход
-          </button>
-        {% endif %}
-      </div>
-    </div>
-</div>
-
-<div class="center">
-  <h4>Раздел калькуляции (введи и посчитай)</h4>
-  <div class="wrapper">
-    <!-- Группа основных сервисов -->
-    <div class="button-grid">
-      <form action="{% url 'shirka' %}">
-        <button type="submit" name="shirka">
-          <img src="{% static 'calcapp/images/shirkaphoto.png' %}" width="106" height="71" alt=""/>
-          <br>
-          Широкоформатная печать
-        </button>
-      </form>
-      <form action="">
-        <button type="submit" name="uvshka">
-          <img src="{% static 'calcapp/images/uvshirkaphoto.png' %}" width="106" height="71" alt=""/>
-          <br>
-          УФ печать рулонная
-        </button>
-      </form>
-      <form action="">
-        <button type="submit" name="uvshkalist">
-          <img src="{% static 'calcapp/images/planshetphoto.png' %}" width="106" height="71" alt=""/>
-          <br>
-          УФ печать листовая
-        </button>
-      </form>
-      <form action="">
-        <button type="submit" name="plotterka">
-          <img src="{% static 'calcapp/images/ploterphoto.png' %}" width="106" height="71" alt=""/>
-          <br>
-          Плотерная резка
-        </button>
-      </form>
-      <form action="">
-        <button type="submit" name="calcviveski">
-          <img src="{% static 'calcapp/images/viveskiphoto.png' %}" width="106" height="71" alt=""/>
-          <br>
-          Вывески
-        </button>
-      </form>
-      <form action="">
-        <button type="submit" name="calcneon">
-          <img src="{% static 'calcapp/images/neonphoto.png' %}" width="106" height="71" alt=""/>
-          <br>
-          Неон
-        </button>
-      </form>
-      <form action="">
-        <button type="submit" name="calcfreza">
-          <img src="{% static 'calcapp/images/frezaphoto.png' %}" width="106" height="71" alt=""/>
-          <br>
-          Фрезеровка
-        </button>
-      </form>
-      <form action="">
-        <button type="submit" name="calclazerrez">
-          <img src="{% static 'calcapp/images/lazerphoto.png' %}" width="106" height="71" alt=""/>
-          <br>
-          Лазерная резка
-        </button>
-      </form>
-      <form action="">
-        <button type="submit" name="dizain">
-          <img src="{% static 'calcapp/images/dizainphoto.png' %}" width="112" height="71" alt=""/>
-          <br>
-          Дизайн
-        </button>
-      </form>
-    </div>
-
-    <!-- Корзина и WhatsApp (всегда внизу) -->
-    <div class="action-row">
-      <form action="">
-        <button type="submit" name="basketshirka"><img src="{% static '/calcapp/images/images/pngtree-shopping-cart-shopping-bag-shopping-festival-3d-png-image_13453506.png' %}" width="20" height="20" alt=""/>КОРЗИНА</button>
-      </form>
-        <a href="/" class="rounded-lg px-3 py-2 font-medium inline-flex items-center">
-            <img src="{% static '/calcapp/images/home2.jpeg' %}" alt="Домой" width="50">
-<!--              <i class="uil uil-sign-out-alt mr-1"></i>-->
-<!--            Домой-->
-        </a>
-      <a title="Telegram" href="https://t.me/+79032987866" class="whatsapp-btn">
-        <img src="{% static 'main/img/free-telegram-3d-icon-png-download-8399550.png' %}" alt="Написать в Telegram" width="50">
-      </a>
-    </div>
+  <div class="header-actions">
+    <a href="" class="header-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      Корзина
+    </a>
+    {% if user.is_authenticated %}
+    <a href="" class="header-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Личный кабинет
+    </a>
+    {% else %}
+    <a href="" class="header-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Войти
+    </a>
+    {% endif %}
+    <div class="header-separator"></div>
+    <a href="https://t.me/+79032987866" class="header-telegram" title="Telegram">
+      <img src="{% static 'calcapp/images/free-telegram-3d-icon-png-download-8399550.png' %}" alt="Telegram">
+    </a>
   </div>
+
+  <!-- Бургер (виден только на мобильных) -->
+  <button class="nav-toggle" id="nav-toggle" aria-label="Меню" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Мобильное меню (выпадает под шапкой) -->
+<div class="mobile-nav" id="mobile-nav">
+  <ul>
+    <li><a href="{% url 'kulkulatori' %}">Главная</a></li>
+    <li><a href="">О нас</a></li>
+    <li><a href="">Оплата и доставка</a></li>
+    <li><a href="">Тех. требования</a></li>
+    <li><a href="">Контакты</a></li>
+  </ul>
 </div>
 
-{% block content %}
-{% endblock %}
+<!-- ========== HERO-БАННЕР ========== -->
+<div class="hero-banner">
 
-    <!-- Баннер о cookies -->
-    <div class="cookie-notice" style="display: none;">
-        <p>
-            Продолжая использовать наш сайт, вы соглашаетесь на обработку файлов Cookie...
-            <a href="/privacy">Политика конфиденциальности</a>.
-        </p>
-        <button type="button">Понятно</button>
+  <!-- Панель 1: Приветствие (отдельная карточка) -->
+  <div class="hero-panel hero-panel--navy">
+    <img class="hero-panel__img" src="{% static 'calcapp/images/person.png' %}" alt="">
+    {% now "H" as current_hour %}
+    {% if current_hour|add:"0" < 12 %}
+      <h2 class="hero-panel__title">Доброе утро{% if user.is_authenticated %}, {{ user.username }}{% endif %}</h2>
+    {% elif current_hour|add:"0" > 17 %}
+      <h2 class="hero-panel__title">Добрый вечер{% if user.is_authenticated %}, {{ user.username }}{% endif %}</h2>
+    {% else %}
+      <h2 class="hero-panel__title">Добрый день{% if user.is_authenticated %}, {{ user.username }}{% endif %}</h2>
+    {% endif %}
+    <div class="hero-panel__date">{% now "d.m.Y" %}</div>
+  </div>
+
+  <!-- Правая группа: Посчитай + Оплати + Получи (готовый баннер) -->
+  <div class="hero-right">
+    <img src="{% static 'calcapp/images/header_images.png' %}" alt="Посчитай Оплати Получи">
+  </div>
+
+</div>
+
+<!-- ========== СТРОКА СЕРВИСОВ (для страниц калькулятора) ========== -->
+{% block services %}{% endblock %}
+
+<!-- ========== ОСНОВНОЙ КОНТЕНТ ========== -->
+{% block content %}{% endblock %}
+
+<!-- ========== ФУТЕР ========== -->
+<footer class="site-footer">
+  <div class="footer-grid">
+
+    <!-- Колонка 1: Логотип + навигация -->
+    <div class="footer-col">
+      <span class="footer-col__logo">Завод Рекламы</span>
+      <ul>
+        <li><a href="">Главная</a></li>
+        <li><a href="">О нас</a></li>
+        <li><a href="">Оплата и доставка</a></li>
+        <li><a href="">Тех. требования</a></li>
+        <li><a href="">Документы</a></li>
+      </ul>
     </div>
 
-    <!-- Скрытое поле с session_key (нужно для бэкенд-логики) -->
-    <input type="hidden" id="session-key" value="{{ request.session.session_key }}">
+    <!-- Колонка 2: Режим работы офиса -->
+    <div class="footer-col">
+      <h4>Режим работы офиса</h4>
+      <p>Пн–Пт: 10:00 – 19:00</p>
+      <p>Сб: 11:00 – 18:00</p>
+      <p>Вс: Выходной</p>
+    </div>
 
+    <!-- Колонка 3: Выдача заказов -->
+    <div class="footer-col">
+      <h4>Выдача заказов</h4>
+      <p>Пн–Пт: 10:30 – 18:30</p>
+      <p>Сб: 11:30 – 17:30</p>
+      <p>Вс: Выходной</p>
+    </div>
 
-    <!-- Дополнительные скрипты из блоков -->
-    {% block extra_js %}{% endblock %}
+    <!-- Колонка 4: Контакты -->
+    <div class="footer-col">
+      <h4>Контакты</h4>
+      <p><a href="tel:+79032987866">+7 (903) 298-78-66</a></p>
+      <p><a href="mailto:zakaz@vryad.ru">zakaz@vryad.ru</a></p>
+      <p>Москва, ул. 2-я Вольская, д. 30А, стр. 1</p>
+    </div>
 
- <!-- Блок футера -->
-<div class="center">
-    <footer >
-      <div class="footer-container">
-          <!-- данные о работе -->
-          <nav>
-            <ul class="footer-rab">
-              <li><p>© 2010 - {% now "Y" %} г. <br> Завод рекламы «Всё Рядом». </p></li>
-                <br>
-              <li><p><strong>Режим работы офиса:</strong></p>
-                <p>Пн-Пт - 10:00 - 19:00</p>
-                <p>Сб - 11:00 - 18:00</p>
-                <p>Вс - Выходной</p>
-              </li>
-            </ul>
-          </nav>
-          <!-- Меню со ссылками -->
-          <nav>
-            <ul class="footer-nav">
-                <li><a href="/main/about">О нас</a></li>
-                <li><a href="/main">Контакты</a></li>
-                <li><a href="/main/docs">Документы</a></li>
-                <li><a href="/main/tehdoc">Тех. требования</a></li>
-                <li><a href="/main/payinfo">Оплата и доставка</a></li>
-            </ul>
-          </nav>
+  </div>
+  <div class="footer-bottom">
+    © 2010 – {% now "Y" %} г. Завод рекламы «Всё Рядом»
+  </div>
+</footer>
 
-          <!-- Блок с контактами -->
-          <ul class="footer-contacts">
-            <li><a href="tel:+79032987866">Телефон: +7 (903)298-78-66</a></li>
-            <li><a href="mailto:zakaz@vryad.ru">Email: zakaz@vryad.ru</a></li>
-          </ul>
-        </div>
-    </footer>
-</div>
+<!-- Скрытое поле с session_key -->
+<input type="hidden" id="session-key" value="{{ request.session.session_key }}">
+
+{% block extra_js %}{% endblock %}
+
+<script>
+  (function () {
+    const toggle = document.getElementById('nav-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    if (!toggle || !mobileNav) return;
+    toggle.addEventListener('click', function () {
+      const isOpen = mobileNav.classList.toggle('mobile-nav--open');
+      toggle.classList.toggle('nav-toggle--open', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+    // Закрыть при клике вне меню
+    document.addEventListener('click', function (e) {
+      if (!toggle.contains(e.target) && !mobileNav.contains(e.target)) {
+        mobileNav.classList.remove('mobile-nav--open');
+        toggle.classList.remove('nav-toggle--open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
+</script>
+
 </body>
 </html>

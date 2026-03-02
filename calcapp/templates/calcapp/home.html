@@ -1,11 +1,58 @@
-{% extends "calcapp/basecalc.html" %}
+{% extends "calcapp/basecalc2.html" %}
+{% load static %}
 
-    {% block title %}
-    Страница выбора калькуляции
-    {% endblock %}
+{% block title %}Завод Рекламы — Главная{% endblock %}
 
 {% block content %}
-<!--<div class="center">-->
-<!--    <h4>Выберите калькулятор согласно Вашим потребностям и получите расчёт</h4>-->
-<!--</div>-->
+<section class="calc-categories-section">
+  <h2 class="calc-categories-title">Раздел калькуляции</h2>
+  <div class="calc-categories-grid">
+
+    <a href="{% url 'shirka' %}" class="calc-card">
+      <img src="{% static 'calcapp/images/wide-format-print-large.jpg' %}" alt="Широкоформатная печать">
+      <span>Широкоформатная печать</span>
+    </a>
+
+    <a href="#" class="calc-card">
+      <img src="{% static 'calcapp/images/uv-print-roll.jpg' %}" alt="УФ печать рулонная">
+      <span>УФ печать рулонная</span>
+    </a>
+
+    <a href="#" class="calc-card">
+      <img src="{% static 'calcapp/images/uv-print-sheet-large.jpg' %}" alt="УФ печать листовая">
+      <span>УФ печать листовая</span>
+    </a>
+
+    <a href="#" class="calc-card">
+      <img src="{% static 'calcapp/images/plotter-cutting-large.jpg' %}" alt="Плотерная резка">
+      <span>Плотерная резка</span>
+    </a>
+
+    <a href="#" class="calc-card">
+      <img src="{% static 'calcapp/images/signs-large.jpg' %}" alt="Вывески">
+      <span>Вывески</span>
+    </a>
+
+    <a href="#" class="calc-card">
+      <img src="{% static 'calcapp/images/neon-large.jpg' %}" alt="Неон">
+      <span>Неон</span>
+    </a>
+
+    <a href="#" class="calc-card">
+      <img src="{% static 'calcapp/images/milling-large.jpg' %}" alt="Фрезеровка">
+      <span>Фрезеровка</span>
+    </a>
+
+    <a href="#" class="calc-card">
+      <img src="{% static 'calcapp/images/laser-cutting-large.jpg' %}" alt="Лазерная резка">
+      <span>Лазерная резка</span>
+    </a>
+
+    <a href="#" class="calc-card">
+      <img src="{% static 'calcapp/images/design-large.jpg' %}" alt="Дизайн">
+      <span>Дизайн</span>
+    </a>
+
+  </div>
+</section>
 {% endblock %}

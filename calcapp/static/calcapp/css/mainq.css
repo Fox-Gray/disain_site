@@ -227,3 +227,758 @@
     padding-left: 0
 }
 
+/* ============================================================
+   НОВЫЙ ДИЗАЙН — Калькулятор final
+   ============================================================ */
+
+/* --- Глобальный сброс отступов body --- */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f4f5f7;
+}
+
+/* ---- ХЕДЕР ---- */
+.site-header {
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.site-logo {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1a2340;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-nav {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav a {
+  text-decoration: none;
+  color: #444;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding-bottom: 2px;
+}
+
+.site-nav a:hover,
+.site-nav a.active {
+  color: #3a7bd5;
+  border-bottom: 2px solid #3a7bd5;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  background: #fff;
+  color: #333;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.header-btn:hover {
+  background: #f5f7fa;
+}
+
+.header-separator {
+  width: 1px;
+  height: 32px;
+  background: #e0e0e0;
+  margin: 0 4px;
+}
+
+.header-telegram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #3a7bd5;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.header-telegram img {
+  width: 22px;
+  height: 22px;
+  filter: brightness(0) invert(1);
+}
+
+/* ---- HERO-БАННЕР ---- */
+.hero-banner {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  padding: 8px;
+  background: #f4f5f7;
+  box-sizing: border-box;
+}
+
+/* Только панель "Добрый день" */
+.hero-panel {
+  flex: 0 0 28%;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px 24px;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  border-radius: 16px;
+}
+
+.hero-panel--navy { background: linear-gradient(135deg, #2c3e6e 0%, #3b5998 100%); }
+
+.hero-panel__img {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  max-height: 195px;
+  max-width: 160px;
+  object-fit: contain;
+}
+
+.hero-panel__title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  line-height: 1.2;
+}
+
+.hero-panel__date {
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+/* Правая группа с готовым баннером */
+.hero-right {
+  flex: 1;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
+}
+
+.hero-right img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  object-position: left center;
+}
+
+/* ---- СТРОКА СЕРВИСОВ ---- */
+.services-section {
+  background: #fff;
+  padding: 24px 40px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.services-row {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #d0d5dd transparent;
+}
+
+.services-row::-webkit-scrollbar {
+  height: 4px;
+}
+.services-row::-webkit-scrollbar-track {
+  background: transparent;
+}
+.services-row::-webkit-scrollbar-thumb {
+  background: #d0d5dd;
+  border-radius: 4px;
+}
+
+.service-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 12px 14px;
+  border: 1px solid #e8ecf0;
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  color: #333;
+  font-weight: 500;
+  white-space: normal;
+  text-align: center;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  flex: 0 0 130px;   /* не сжимается, не растягивается */
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.service-btn:hover {
+  background: #f5f7ff;
+  border-color: #c5cfe0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+}
+
+.service-btn img {
+  width: 120px;
+  height: 90px;
+  object-fit: contain;
+}
+
+/* ---- АКТИВНАЯ КНОПКА СЕРВИСА ---- */
+.service-btn--active {
+  border-color: #3a7bd5;
+  background: #f0f4ff;
+  box-shadow: 0 0 0 2px #3a7bd540;
+}
+
+/* ---- ГЛАВНАЯ СТРАНИЦА: СЕТКА УСЛУГ ---- */
+.calc-categories-section {
+  max-width: 1400px;
+  margin: 40px auto;
+  padding: 0 40px;
+}
+
+.calc-categories-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a2340;
+  margin: 0 0 24px 0;
+}
+
+.calc-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.calc-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 16px 20px;
+  background: #fff;
+  border: 1px solid #e8ecf0;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #1a2340;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.calc-card:hover {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  border-color: #b0bfd8;
+  transform: translateY(-2px);
+}
+
+.calc-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.calc-card span {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1a2340;
+}
+
+@media (max-width: 1100px) {
+  .calc-categories-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .calc-categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .calc-categories-section {
+    padding: 0 20px;
+    margin: 24px auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .calc-categories-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- СЕКЦИЯ КАЛЬКУЛЯТОРА ---- */
+.calc-section {
+  max-width: 1000px;
+  margin: 32px auto;
+  padding: 0 24px;
+}
+
+.calc-section h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a2340;
+  margin: 0 0 24px 0;
+}
+
+.calc-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 40px;
+  margin-bottom: 24px;
+}
+
+.video-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.shirka-photo {
+  width: 100%;
+  max-width: 620px;
+  border-radius: 10px;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.calc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.calc-field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.calc-input,
+.calc-select,
+.calc-textarea {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #f0f2f5;
+  font-size: 0.95rem;
+  color: #333;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.calc-input:focus,
+.calc-select:focus,
+.calc-textarea:focus {
+  background: #e8eaf0;
+  box-shadow: 0 0 0 2px #3a7bd540;
+}
+
+.calc-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.calc-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.calc-checkbox-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #3a7bd5;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.calc-checkbox-row label {
+  font-size: 0.9rem;
+  color: #333;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.calc-submit-btn {
+  padding: 12px 36px;
+  background: #3a7bd5;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.calc-submit-btn:hover {
+  background: #2c63b8;
+}
+
+/* ---- КАРТОЧКА РЕЗУЛЬТАТА ---- */
+.result-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 20px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.result-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.result-card__label {
+  font-size: 0.85rem;
+  color: #888;
+  font-weight: 500;
+}
+
+.result-card__price {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a2340;
+}
+
+.result-card__btn {
+  padding: 12px 28px;
+  background: #3a7bd5;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.result-card__btn:hover {
+  background: #2c63b8;
+}
+
+/* ---- ФУТЕР ---- */
+.site-footer {
+  background: #2c3448;
+  color: #cdd5e0;
+  padding: 40px 32px 24px;
+  margin-top: 48px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto 32px;
+}
+
+.footer-col__logo {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.footer-col h4 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.footer-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-col ul li a {
+  color: #aab4c4;
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.footer-col ul li a:hover {
+  color: #fff;
+}
+
+.footer-col p {
+  margin: 4px 0;
+  font-size: 0.875rem;
+  color: #aab4c4;
+}
+
+.footer-bottom {
+  border-top: 1px solid #3d4a62;
+  padding-top: 16px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #7a8699;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ---- БУРГЕР-КНОПКА ---- */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+  background: none;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #333;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+  transform-origin: center;
+}
+
+/* Анимация крестика */
+.nav-toggle--open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle--open span:nth-child(2) { opacity: 0; }
+.nav-toggle--open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---- МОБИЛЬНОЕ МЕНЮ ---- */
+.mobile-nav {
+  display: none;
+  position: absolute;
+  top: 64px; /* высота шапки */
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  z-index: 99;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease;
+}
+
+.mobile-nav--open {
+  max-height: 400px;
+}
+
+.mobile-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+}
+
+.mobile-nav ul li a {
+  display: block;
+  padding: 14px 24px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.15s;
+}
+
+.mobile-nav ul li:last-child a {
+  border-bottom: none;
+}
+
+.mobile-nav ul li a:hover {
+  background: #f5f7ff;
+  color: #3a7bd5;
+}
+
+/* Позиционируем шапку для выпадающего меню */
+.site-header {
+  position: relative;
+}
+
+/* ---- АДАПТИВНЫЕ ВИДЕО ---- */
+.video-responsive {
+  position: relative;
+  padding-bottom: 56.25%; /* соотношение 16:9 */
+  height: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  flex: 1 1 280px;
+  max-width: 480px;
+  min-width: 220px;
+}
+
+.video-responsive iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ---- АДАПТАЦИЯ ---- */
+@media (max-width: 900px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .calc-form-grid {
+    grid-template-columns: 1fr;
+  }
+  .site-nav {
+    display: none;
+  }
+  .nav-toggle {
+    display: flex;
+  }
+  .mobile-nav {
+    display: block;
+  }
+  .services-section {
+    padding: 16px 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Hero */
+  .hero-banner {
+    flex-direction: column;
+    height: auto;
+  }
+  .hero-panel {
+    min-height: 120px;
+    height: auto;
+    padding: 16px;
+  }
+  .hero-panel__title {
+    font-size: 1.1rem;
+  }
+  .hero-panel__img {
+    max-height: 110px;
+    max-width: 110px;
+  }
+
+  /* Header */
+  .site-header {
+    padding: 0 12px;
+    gap: 8px;
+  }
+  .header-btn {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+  }
+
+  /* Services */
+  .services-section {
+    padding: 12px 8px;
+  }
+
+  /* Calc section */
+  .calc-section {
+    padding: 0 12px;
+    margin: 20px auto;
+  }
+  .calc-section h2 {
+    font-size: 1.2rem;
+    margin: 0 0 16px 0;
+  }
+  .calc-submit-btn {
+    width: 100%;
+  }
+  .result-card__btn {
+    width: 100%;
+  }
+
+  /* Video grid */
+  .video-grid {
+    flex-direction: column;
+  }
+  .video-responsive {
+    max-width: 100%;
+    flex: 1 1 auto;
+  }
+
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .result-card {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 400px) {
+  .site-logo {
+    font-size: 1rem;
+  }
+  .header-btn {
+    padding: 5px 8px;
+    font-size: 0.72rem;
+  }
+  .header-telegram {
+    width: 32px;
+    height: 32px;
+  }
+  .calc-section h2 {
+    font-size: 1.05rem;
+  }
+}
+

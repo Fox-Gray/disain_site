@@ -1,0 +1,51 @@
+{% load static %}
+<section class="services-section">
+  <div class="services-row">
+
+    <a href="{% url 'shirka' %}" class="service-btn {% if active_service == 'shirka' %}service-btn--active{% endif %}">
+      <img src="{% static 'calcapp/images/wide-format-print.jpg' %}" alt="">
+      Широкоформатная печать
+    </a>
+
+    <a href="#" class="service-btn {% if active_service == 'uvshka' %}service-btn--active{% endif %}">
+      <img src="{% static 'calcapp/images/uv-print-roll.jpg' %}" alt="">
+      УФ печать рулонная
+    </a>
+
+    <a href="#" class="service-btn {% if active_service == 'uvshkalist' %}service-btn--active{% endif %}">
+      <img src="{% static 'calcapp/images/uv-print-sheet.jpg' %}" alt="">
+      УФ печать листовая
+    </a>
+
+    <a href="#" class="service-btn {% if active_service == 'plotterka' %}service-btn--active{% endif %}">
+      <img src="{% static 'calcapp/images/plotter-cutting.jpg' %}" alt="">
+      Плоттерная резка
+    </a>
+
+    <a href="#" class="service-btn {% if active_service == 'calcviveski' %}service-btn--active{% endif %}">
+      <img src="{% static 'calcapp/images/signs.jpg' %}" alt="">
+      Вывески
+    </a>
+
+    <a href="#" class="service-btn {% if active_service == 'calcneon' %}service-btn--active{% endif %}">
+      <img src="{% static 'calcapp/images/neon.jpg' %}" alt="">
+      Неон
+    </a>
+
+    <a href="#" class="service-btn {% if active_service == 'calcfreza' %}service-btn--active{% endif %}">
+      <img src="{% static 'calcapp/images/milling.jpg' %}" alt="">
+      Фрезеровка
+    </a>
+
+    <a href="#" class="service-btn {% if active_service == 'calclazerrez' %}service-btn--active{% endif %}">
+      <img src="{% static 'calcapp/images/laser-cutting.jpg' %}" alt="">
+      Лазерная резка
+    </a>
+
+    <a href="#" class="service-btn {% if active_service == 'dizain' %}service-btn--active{% endif %}">
+      <img src="{% static 'calcapp/images/design.jpg' %}" alt="">
+      Дизайн
+    </a>
+
+  </div>
+</section>

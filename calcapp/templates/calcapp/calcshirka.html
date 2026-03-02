@@ -1,68 +1,181 @@
 {% extends "calcapp/basecalc2.html" %}
+{% load static %}
 
-    {% block title %}
-    калькулятор ширки
-    {% endblock %}
+{% block title %}Калькулятор широкоформатной печати{% endblock %}
+
+{% block services %}
+{% with active_service='shirka' %}{% include 'calcapp/_services_nav.html' %}{% endwith %}
+{% endblock %}
 
 {% block content %}
 
+<section class="calc-section">
+  <h2>Калькулятор широкоформатной печати</h2>
 
-<div class="center">
-    <div class="b-section__header">
-        <div class="b-section__title">
-            <h4 class="b-section__title-text b-heading b-heading_level_4">Калькулятор широкоформатной печати</h4>
-        </div>
-    </div>
-    <div class="b-section__body">
-        <div class="b-section b-section_content_payment-method">
+  <form method="post" action="{% url 'shirka' %}">
+    {% csrf_token %}
 
-            <div class="b-section__body">
-                <!-- Общий контейнер для колонок -->
-                <div class="b-content-columns b-content-columns_content_payment-method">
-                    <!-- Левая колонка -->
-                    <div class="b-content-column b-content-column_layout_a">
-                        <div class="b-content-column__in">
-                            <ul class="b-stories b-stories_content_payment-method">
-                                <li class="b-story b-story_content_payment-method">
-                                    <form method="post" action="{% url 'shirka' %}">
-                                        {% csrf_token %}
-                                        <table>
-                                            {{form.as_table}}
-                                        </table>
-                                        <br>
-                                        <button type="submit" name="Send">посчитать</button>
-                                        <button type="submit" name="basket">Добавить в корзину</button>
-                                    </form>
-                                    <br>
-                                    Итого сумма:
-                                    <h1>{{result}} Рублей</h1>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Правая колонка -->
-                    <div class="b-content-column b-content-column_layout_b">
-                        <div class="b-content-column__in">
-                            <div class="b-story b-story_content_fast-payment">
-                                <h4 class="b-story__title">
-                                    <span class="b-story__title-text">Пример широкоформатной печати</span>
-                                </h4>
-                                <div class="b-story__footer">
-                                    <ul class="b-list b-list_content_cards-logo">
-                                        <li class="b-list__item">
-                                            <img class="b-list__image" src="../../static/calcapp/images/shirkaphoto.png" width="300">
-                                        </li>
-                                    </ul>
-									<iframe width="304" height="171" style="border-radius: 10px;" src="https://rutube.ru/play/embed/1cc20db66937f19d6b23ee51afa6ad77"  allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-                                    <iframe width="304" height="171" style="border-radius: 10px;" src="https://rutube.ru/play/embed/5a2efa45969ea87dee3db8b3bcced6b8?skinColor=5E35B1"  allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> <!-- /b-content-columns -->
-            </div>
+    <div class="calc-form-grid">
+
+      <!-- ===== ЛЕВАЯ КОЛОНКА ===== -->
+
+      <!-- Наименование материала -->
+      <div class="calc-field">
+        <label for="id_matrul">Наименование материала</label>
+        <select name="matrul" id="id_matrul" class="calc-select">
+          <option value="" disabled selected>— материал —</option>
+          {% for val, label in form.matrul.field.choices %}
+            <option value="{{ val }}" {% if form.matrul.value == val %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Люверсы -->
+      <div class="calc-field">
+        <div class="calc-checkbox-row">
+          <input type="checkbox" name="luversi" id="id_luversi" {% if form.luversi.value %}checked{% endif %}>
+          <label for="id_luversi">Люверсы</label>
         </div>
+      </div>
+
+      <!-- Ширина -->
+      <div class="calc-field">
+        <label for="id_shir">Ширина материала</label>
+        <input type="number" name="shir" id="id_shir" step="0.01" min="0" max="1.5"
+               class="calc-input" placeholder="метры"
+               value="{{ form.shir.value|default:'' }}">
+      </div>
+
+      <!-- Количество люверсов -->
+      <div class="calc-field">
+        <label for="id_kolvoluver">Количество люверсов</label>
+        <input type="number" name="kolvoluver" id="id_kolvoluver" min="0"
+               class="calc-input" placeholder="шт. на 1 метр"
+               value="{{ form.kolvoluver.value|default:'' }}">
+      </div>
+
+      <!-- Высота -->
+      <div class="calc-field">
+        <label for="id_vis">Высота материала</label>
+        <input type="number" name="vis" id="id_vis" step="0.01" min="0"
+               class="calc-input" placeholder="метры"
+               value="{{ form.vis.value|default:'' }}">
+      </div>
+
+      <!-- Количество экземпляров -->
+      <div class="calc-field">
+        <label for="id_kolvosh">Количество экземпляров</label>
+        <input type="number" name="kolvosh" id="id_kolvosh" min="1"
+               class="calc-input" placeholder="шт."
+               value="{{ form.kolvosh.value|default:'1' }}">
+      </div>
+
+      <!-- Ламинация -->
+      <div class="calc-field">
+        <div class="calc-checkbox-row">
+          <input type="checkbox" name="checklaminat" id="id_checklaminat" {% if form.checklaminat.value %}checked{% endif %}>
+          <label for="id_checklaminat">Ламинация</label>
+        </div>
+      </div>
+
+      <!-- Услуги офиса -->
+      <div class="calc-field">
+        <div class="calc-checkbox-row">
+          <input type="checkbox" name="ofise" id="id_ofise" {% if form.ofise.value %}checked{% endif %}>
+          <label for="id_ofise">Услуги офиса</label>
+        </div>
+      </div>
+
+      <!-- Плоттерная резка -->
+      <div class="calc-field">
+        <div class="calc-checkbox-row">
+          <input type="checkbox" name="checkplotter" id="id_checkplotter" {% if form.checkplotter.value %}checked{% endif %}>
+          <label for="id_checkplotter">Плоттерная резка</label>
+        </div>
+      </div>
+
+      <!-- Выезд на объект -->
+      <div class="calc-field">
+        <div class="calc-checkbox-row">
+          <input type="checkbox" name="viezdNaObject" id="id_viezdNaObject" {% if form.viezdNaObject.value %}checked{% endif %}>
+          <label for="id_viezdNaObject">Выезд на объект</label>
+        </div>
+      </div>
+
+      <!-- Длина плоттерки -->
+      <div class="calc-field">
+        <label for="id_dliplotter">Длина плоттерки</label>
+        <input type="number" name="dliplotter" id="id_dliplotter" step="0.01" min="0"
+               class="calc-input" placeholder="м.п."
+               value="{{ form.dliplotter.value|default:'' }}">
+      </div>
+
+      <!-- Комментарий -->
+      <div class="calc-field">
+        <label for="id_commentZakazForm">Комментарий к заказу</label>
+        <textarea name="commentZakazForm" id="id_commentZakazForm"
+                  class="calc-textarea" placeholder="ваш текст" maxlength="255">{{ form.commentZakazForm.value|default:'' }}</textarea>
+      </div>
+
+      <!-- Выборка -->
+      <div class="calc-field">
+        <div class="calc-checkbox-row">
+          <input type="checkbox" name="checkviborka" id="id_checkviborka" {% if form.checkviborka.value %}checked{% endif %}>
+          <label for="id_checkviborka">Выборка</label>
+        </div>
+      </div>
+
+      <!-- Пустая ячейка для выравнивания -->
+      <div class="calc-field"></div>
+
+      <!-- Проклейка банера -->
+      <div class="calc-field">
+        <div class="calc-checkbox-row">
+          <input type="checkbox" name="prokleikabaner" id="id_prokleikabaner" {% if form.prokleikabaner.value %}checked{% endif %}>
+          <label for="id_prokleikabaner">Проклейка банера</label>
+        </div>
+      </div>
+
     </div>
-</div>
+
+    <!-- Кнопка посчитать -->
+    <button type="submit" name="Send" class="calc-submit-btn">Посчитать</button>
+
+    <!-- Карточка результата -->
+    {% if result is not None %}
+    <div class="result-card">
+      <div class="result-card__info">
+        <span class="result-card__label">Итого сумма:</span>
+        <span class="result-card__price">{{ result }} ₽</span>
+      </div>
+      <button type="submit" name="basket" class="result-card__btn">Добавить в корзину</button>
+    </div>
+    {% else %}
+    <div class="result-card">
+      <div class="result-card__info">
+        <span class="result-card__label">Итого сумма:</span>
+        <span class="result-card__price">— ₽</span>
+      </div>
+      <button type="submit" name="basket" class="result-card__btn" disabled style="opacity:0.5;cursor:default;">Добавить в корзину</button>
+    </div>
+    {% endif %}
+
+  </form>
+</section>
+
+<!-- Пример и видео о широкоформатной печати -->
+<section class="calc-section">
+  <h2>Пример широкоформатной печати</h2>
+  <img src="{% static 'calcapp/images/shirkaphoto.png' %}" alt="Пример широкоформатной печати" class="shirka-photo">
+  <h2>Вот ссылки на видео</h2>
+  <div class="video-grid">
+    <div class="video-responsive">
+      <iframe src="https://rutube.ru/play/embed/1cc20db66937f19d6b23ee51afa6ad77" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+    </div>
+    <div class="video-responsive">
+      <iframe src="https://rutube.ru/play/embed/5a2efa45969ea87dee3db8b3bcced6b8?skinColor=5E35B1" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+    </div>
+  </div>
+</section>
 
 {% endblock %}
