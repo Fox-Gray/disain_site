@@ -405,12 +405,14 @@ body {
   background: #fff;
   padding: 12px 40px;
   border-bottom: 1px solid #e0e0e0;
+  text-align: center;
+  overflow-x: auto;
 }
 
 .services-row {
-  display: flex;
+  display: inline-flex;
+  text-align: left;
   gap: 12px;
-  overflow-x: auto;
   padding-bottom: 8px;
   scrollbar-width: thin;
   scrollbar-color: #d0d5dd transparent;
